@@ -1,0 +1,73 @@
+{
+  "name": "droidlink",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DroidLink - Wireless & USB Android screen mirroring and full device control over ADB",
+  "main": "dist-electron/desktop/src/main/index.js",
+  "scripts": {
+    "setup:runtime": "powershell -ExecutionPolicy Bypass -File scripts/download-runtime.ps1",
+    "dev:main": "tsc -p desktop/tsconfig.main.json --watch",
+    "dev:renderer": "vite --config desktop/vite.config.ts",
+    "dev:electron": "wait-on http://127.0.0.1:5173 dist-electron/desktop/src/main/index.js && cross-env DROIDLINK_DEV_URL=http://127.0.0.1:5173 electron .",
+    "dev": "tsc -p desktop/tsconfig.main.json && concurrently -k -n MAIN,VITE,APP \"npm run dev:main\" \"npm run dev:renderer\" \"npm run dev:electron\"",
+    "build:main": "tsc -p desktop/tsconfig.main.json",
+    "build:renderer": "vite build --config desktop/vite.config.ts",
+    "build": "npm run build:main && npm run build:renderer",
+    "start": "npm run build && electron .",
+    "web": "npm run build && node dist-electron/desktop/src/main/web-only.js",
+    "typecheck": "tsc -p desktop/tsconfig.main.json --noEmit && tsc -p desktop/tsconfig.renderer.json --noEmit",
+    "test": "vitest run",
+    "pack:win": "npm run build && electron-builder --win"
+  },
+  "dependencies": {
+    "lucide-react": "^0.475.0",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.9",
+    "@types/node": "^22.13.4",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
+    "tailwindcss": "^4.0.9",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5",
+    "wait-on": "^8.0.2"
+  },
+  "build": {
+    "appId": "com.droidlink.app",
+    "productName": "DroidLink",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "dist-renderer/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/platform-tools",
+        "to": "platform-tools"
+      },
+      {
+        "from": "resources/server",
+        "to": "server"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    }
+  }
+}

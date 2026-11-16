@@ -1,0 +1,35 @@
+# Dependencies & build outputs
+node_modules/
+dist-electron/
+dist-renderer/
+release/
+.tmp-download/
+resources/platform-tools/
+resources/server/
+*.log
+
+# Environment, secrets, certificates, and ADB keys
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+adbkey
+adbkey.pub
+
+# Local screen captures, recordings, and sideloaded APKs
+*.png
+*.jpg
+*.jpeg
+*.webm
+*.mp4
+*.mkv
+*.apk
+droidlink-*
+
+# OS & temporary files
+.DS_Store
+Thumbs.db
+*.tmp

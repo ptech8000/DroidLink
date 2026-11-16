@@ -1,0 +1,238 @@
+export const SCRCPY_SERVER_VERSION = '5.0.1';
+export const DEVICE_SERVER_PATH = '/data/local/tmp/scrcpy-server.jar';
+export const DEVICE_NAME_FIELD_LENGTH = 64;
+
+export const CODEC_ID = {
+  H264: 0x68323634, // "h264"
+  H265: 0x68323635, // "h265"
+  AV1: 0x00617631,  // "av1"
+  VP8: 0x00767038,  // "vp8"
+  VP9: 0x00767039,  // "vp9"
+  OPUS: 0x6f707573, // "opus"
+  AAC: 0x00616163,  // "aac"
+  FLAC: 0x666c6163, // "flac"
+  RAW: 0x00726177,  // "raw"
+} as const;
+
+export const PACKET_FLAG_SESSION = 1n << 63n;
+export const PACKET_FLAG_CONFIG = 1n << 62n;
+export const PACKET_FLAG_KEY_FRAME = 1n << 61n;
+export const PACKET_PTS_MASK = PACKET_FLAG_KEY_FRAME - 1n;
+
+export const CONTROL_MSG_TYPE = {
+  INJECT_KEYCODE: 0,
+  INJECT_TEXT: 1,
+  INJECT_TOUCH_EVENT: 2,
+  INJECT_SCROLL_EVENT: 3,
+  BACK_OR_SCREEN_ON: 4,
+  EXPAND_NOTIFICATION_PANEL: 5,
+  EXPAND_SETTINGS_PANEL: 6,
+  COLLAPSE_PANELS: 7,
+  GET_CLIPBOARD: 8,
+  SET_CLIPBOARD: 9,
+  SET_DISPLAY_POWER: 10,
+  ROTATE_DEVICE: 11,
+  UHID_CREATE: 12,
+  UHID_INPUT: 13,
+  UHID_DESTROY: 14,
+  OPEN_HARD_KEYBOARD_SETTINGS: 15,
+  START_APP: 16,
+  RESET_VIDEO: 17,
+} as const;
+
+export const DEVICE_MSG_TYPE = {
+  CLIPBOARD: 0,
+  ACK_CLIPBOARD: 1,
+  UHID_OUTPUT: 2,
+} as const;
+
+export const COPY_KEY = {
+  NONE: 0,
+  COPY: 1,
+  CUT: 2,
+} as const;
+
+export const KEY_ACTION = {
+  DOWN: 0,
+  UP: 1,
+} as const;
+
+export const MOTION_ACTION = {
+  DOWN: 0,
+  UP: 1,
+  MOVE: 2,
+  CANCEL: 3,
+  OUTSIDE: 4,
+  POINTER_DOWN: 5,
+  POINTER_UP: 6,
+  HOVER_MOVE: 7,
+  BUTTON_PRESS: 11,
+  BUTTON_RELEASE: 12,
+} as const;
+
+export const MOTION_BUTTON = {
+  NONE: 0,
+  PRIMARY: 1 << 0,
+  SECONDARY: 1 << 1,
+  TERTIARY: 1 << 2,
+  BACK: 1 << 3,
+  FORWARD: 1 << 4,
+} as const;
+
+export const POINTER_ID_MOUSE = -1n;
+export const POINTER_ID_GENERIC_FINGER = -2n;
+export const POINTER_ID_VIRTUAL_FINGER = -3n;
+
+export const ANDROID_META = {
+  NONE: 0,
+  ALT_ON: 0x02,
+  ALT_LEFT_ON: 0x10,
+  ALT_RIGHT_ON: 0x20,
+  SHIFT_ON: 0x01,
+  SHIFT_LEFT_ON: 0x40,
+  SHIFT_RIGHT_ON: 0x80,
+  CTRL_ON: 0x1000,
+  CTRL_LEFT_ON: 0x2000,
+  CTRL_RIGHT_ON: 0x4000,
+  META_ON: 0x10000,
+  META_LEFT_ON: 0x20000,
+  META_RIGHT_ON: 0x40000,
+  CAPS_LOCK_ON: 0x100000,
+  NUM_LOCK_ON: 0x200000,
+} as const;
+
+export const ANDROID_KEYCODE = {
+  UNKNOWN: 0,
+  SOFT_LEFT: 1,
+  SOFT_RIGHT: 2,
+  HOME: 3,
+  BACK: 4,
+  CALL: 5,
+  ENDCALL: 6,
+  NUM_0: 7,
+  NUM_1: 8,
+  NUM_2: 9,
+  NUM_3: 10,
+  NUM_4: 11,
+  NUM_5: 12,
+  NUM_6: 13,
+  NUM_7: 14,
+  NUM_8: 15,
+  NUM_9: 16,
+  STAR: 17,
+  POUND: 18,
+  DPAD_UP: 19,
+  DPAD_DOWN: 20,
+  DPAD_LEFT: 21,
+  DPAD_RIGHT: 22,
+  DPAD_CENTER: 23,
+  VOLUME_UP: 24,
+  VOLUME_DOWN: 25,
+  POWER: 26,
+  CAMERA: 27,
+  CLEAR: 28,
+  A: 29,
+  B: 30,
+  C: 31,
+  D: 32,
+  E: 33,
+  F: 34,
+  G: 35,
+  H: 36,
+  I: 37,
+  J: 38,
+  K: 39,
+  L: 40,
+  M: 41,
+  N: 42,
+  O: 43,
+  P: 44,
+  Q: 45,
+  R: 46,
+  S: 47,
+  T: 48,
+  U: 49,
+  V: 50,
+  W: 51,
+  X: 52,
+  Y: 53,
+  Z: 54,
+  COMMA: 55,
+  PERIOD: 56,
+  ALT_LEFT: 57,
+  ALT_RIGHT: 58,
+  SHIFT_LEFT: 59,
+  SHIFT_RIGHT: 60,
+  TAB: 61,
+  SPACE: 62,
+  ENTER: 66,
+  DEL: 67, // Backspace
+  GRAVE: 68,
+  MINUS: 69,
+  EQUALS: 70,
+  LEFT_BRACKET: 71,
+  RIGHT_BRACKET: 72,
+  BACKSLASH: 73,
+  SEMICOLON: 74,
+  APOSTROPHE: 75,
+  SLASH: 76,
+  AT: 77,
+  PLUS: 81,
+  MENU: 82,
+  SEARCH: 84,
+  MEDIA_PLAY_PAUSE: 85,
+  MEDIA_STOP: 86,
+  MEDIA_NEXT: 87,
+  MEDIA_PREVIOUS: 88,
+  PAGE_UP: 92,
+  PAGE_DOWN: 93,
+  ESCAPE: 111,
+  FORWARD_DEL: 112,
+  CTRL_LEFT: 113,
+  CTRL_RIGHT: 114,
+  CAPS_LOCK: 115,
+  SCROLL_LOCK: 116,
+  META_LEFT: 117,
+  META_RIGHT: 118,
+  SYSRQ: 120,
+  BREAK: 121,
+  MOVE_HOME: 122,
+  MOVE_END: 123,
+  INSERT: 124,
+  F1: 131,
+  F2: 132,
+  F3: 133,
+  F4: 134,
+  F5: 135,
+  F6: 136,
+  F7: 137,
+  F8: 138,
+  F9: 139,
+  F10: 140,
+  F11: 141,
+  F12: 142,
+  NUM_LOCK: 143,
+  NUMPAD_0: 144,
+  NUMPAD_1: 145,
+  NUMPAD_2: 146,
+  NUMPAD_3: 147,
+  NUMPAD_4: 148,
+  NUMPAD_5: 149,
+  NUMPAD_6: 150,
+  NUMPAD_7: 151,
+  NUMPAD_8: 152,
+  NUMPAD_9: 153,
+  NUMPAD_DIVIDE: 154,
+  NUMPAD_MULTIPLY: 155,
+  NUMPAD_SUBTRACT: 156,
+  NUMPAD_ADD: 157,
+  NUMPAD_DOT: 158,
+  NUMPAD_ENTER: 160,
+  VOLUME_MUTE: 164,
+  APP_SWITCH: 187,
+  SLEEP: 223,
+  WAKEUP: 224,
+  CUT: 277,
+  COPY: 278,
+  PASTE: 279,
+} as const;
